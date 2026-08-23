@@ -71,6 +71,7 @@ openspec/README.md
 openspec/specs/engineering-guardrails/spec.md
 openspec/changes/.gitkeep
 scripts/import-guardrails.sh
+scripts/openspec.sh
 scripts/validate.sh
 EOF
 

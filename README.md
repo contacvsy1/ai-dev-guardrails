@@ -16,6 +16,7 @@ This repo defines a lightweight operating model for projects that use AI coding 
 - `openspec/`: OpenSpec-style specs and change folders.
 - `docs/`: plain HTML documentation pages.
 - `templates/`: reusable proposal, review, and deployment templates.
+- `scripts/openspec.sh`: project-local OpenSpec command helper and SOP.
 - `.github/workflows/`: minimal documentation validation workflow.
 
 ## How To Use
@@ -31,11 +32,19 @@ The importer preserves existing target files by default and reports conflicts. U
 
 For feature work:
 
+```sh
+./scripts/openspec.sh help
+./scripts/openspec.sh brownfield
+./scripts/openspec.sh validate
+```
+
 1. Create a change under `openspec/changes/<change-name>/`.
 2. Write the proposal, spec delta, design notes, and tasks.
 3. Review the artifacts before implementation.
 4. Implement the tasks.
 5. Archive the change into `openspec/specs/` when complete.
+
+OpenSpec terminal commands such as `openspec list` run in a shell. AI assistant commands such as `/opsx:propose` run in the assistant chat. Codex uses OpenSpec skills rather than generated prompt command files.
 
 ## Documentation Rule
 

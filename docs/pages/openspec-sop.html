@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>OpenSpec SOP</title>
+    <link rel="stylesheet" href="../styles.css">
+  </head>
+  <body>
+    <main>
+      <h1>OpenSpec SOP</h1>
+      <p>Imported projects expose OpenSpec through a local helper command and the AI assistant's own command or skill surface.</p>
+
+      <h2>Terminal</h2>
+      <pre><code>./scripts/openspec.sh help
+./scripts/openspec.sh brownfield
+./scripts/openspec.sh validate
+./scripts/openspec.sh list
+./scripts/openspec.sh show &lt;change-or-spec&gt;</code></pre>
+
+      <p>The helper delegates to the official <code>openspec</code> CLI when it is installed. It does not vendor or install the CLI.</p>
+
+      <h2>AI Assistant</h2>
+      <p>OpenSpec workflow commands are typed in the AI assistant chat, not the terminal.</p>
+
+      <ul>
+        <li>Claude Code: <code>/opsx:explore</code>, <code>/opsx:propose</code>, <code>/opsx:apply</code>, <code>/opsx:archive</code></li>
+        <li>Cursor/Windsurf/Copilot IDE: <code>/opsx-explore</code>, <code>/opsx-propose</code>, <code>/opsx-apply</code>, <code>/opsx-archive</code></li>
+        <li>Codex: use the installed OpenSpec skills, typically <code>$openspec-explore</code>, <code>$openspec-propose</code>, <code>$openspec-apply-change</code>, <code>$openspec-archive</code></li>
+      </ul>
+
+      <h2>Brownfield Workflow</h2>
+      <ol>
+        <li>Do not document the whole existing app up front.</li>
+        <li>Pick one small real change.</li>
+        <li>Create a proposal, spec delta, design notes, and task list.</li>
+        <li>Review before implementation.</li>
+        <li>Implement from the approved tasks.</li>
+        <li>Validate and archive accepted requirements into <code>openspec/specs/</code>.</li>
+      </ol>
+    </main>
+  </body>
+</html>
