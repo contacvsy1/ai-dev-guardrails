@@ -21,6 +21,14 @@ This repo defines a lightweight operating model for projects that use AI coding 
 
 ## How To Use
 
+Install this repo's local OpenSpec CLI dependency:
+
+```sh
+npm install
+```
+
+In another project, either import these guardrails and add `@fission-ai/openspec` as a dev dependency, or use a global/npx OpenSpec install.
+
 Import the framework into an application repo:
 
 ```sh
@@ -36,6 +44,12 @@ For feature work:
 ./scripts/openspec.sh help
 ./scripts/openspec.sh brownfield
 ./scripts/openspec.sh validate
+```
+
+You can also run:
+
+```sh
+npm run openspec:validate
 ```
 
 1. Create a change under `openspec/changes/<change-name>/`.

@@ -1,0 +1,14 @@
+{
+  "name": "ai-dev-guardrails",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Reusable guardrails for specification-driven AI-assisted development.",
+  "scripts": {
+    "validate": "./scripts/validate.sh",
+    "openspec": "openspec",
+    "openspec:validate": "./scripts/openspec.sh validate --all"
+  },
+  "devDependencies": {
+    "@fission-ai/openspec": "^1.10.0"
+  }
+}

@@ -3,6 +3,16 @@ set -eu
 
 script_dir=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
 repo_root=$(CDPATH= cd -- "$script_dir/.." && pwd)
+local_openspec=$repo_root/node_modules/.bin/openspec
+
+openspec_cmd() {
+  if [ -x "$local_openspec" ]; then
+    OPENSPEC_TELEMETRY=${OPENSPEC_TELEMETRY:-0} "$local_openspec" "$@"
+    return $?
+  fi
+
+  OPENSPEC_TELEMETRY=${OPENSPEC_TELEMETRY:-0} openspec "$@"
+}
 
 usage() {
   cat <<'EOF'
@@ -33,7 +43,7 @@ AI assistant commands:
 Notes:
   - Terminal commands run in your shell.
   - AI assistant commands run in the assistant chat, not the terminal.
-  - This helper does not install OpenSpec; it delegates to `openspec` when available.
+  - This helper uses local node_modules first, then a global `openspec` command.
 EOF
 }
 
@@ -98,7 +108,7 @@ EOF
 }
 
 need_openspec() {
-  if command -v openspec >/dev/null 2>&1; then
+  if [ -x "$local_openspec" ] || command -v openspec >/dev/null 2>&1; then
     return 0
   fi
 
@@ -107,8 +117,10 @@ The official `openspec` CLI was not found on PATH.
 
 Install or invoke OpenSpec with your package manager, then re-run this command.
 Common options:
-  npm install -g openspec
-  npx openspec@latest <command>
+  npm install                         # in this guardrails repo
+  npm install -D @fission-ai/openspec # in another project
+  npm install -g @fission-ai/openspec
+  npx @fission-ai/openspec@latest <command>
 
 This project still contains the OpenSpec folders and SDD guardrails.
 EOF
@@ -120,8 +132,8 @@ run_validate() {
     "$repo_root/scripts/validate.sh"
   fi
 
-  if command -v openspec >/dev/null 2>&1; then
-    openspec validate "$@"
+  if [ -x "$local_openspec" ] || command -v openspec >/dev/null 2>&1; then
+    openspec_cmd validate "$@"
   else
     echo 'Skipped official OpenSpec validation: `openspec` is not installed.'
   fi
@@ -147,7 +159,7 @@ case "$cmd" in
     ;;
   init|update|config|list|show|view|archive|new|status|context|doctor)
     need_openspec
-    openspec "$cmd" "$@"
+    openspec_cmd "$cmd" "$@"
     ;;
   *)
     echo "Unknown command: $cmd" >&2

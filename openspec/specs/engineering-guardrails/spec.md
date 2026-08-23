@@ -1,5 +1,9 @@
 # Engineering Guardrails Specification
 
+## Purpose
+
+Define the operating rules for specification-driven, AI-assisted software development across projects that adopt these guardrails.
+
 ## Requirements
 
 ### Requirement: Spec Before Implementation
